@@ -74,6 +74,11 @@ function playRound(computerSelection, playerSelection) {
 
     }
 
+
+
+    pWins.textContent = `Player wins: ${playerWins}`;
+    cWins.textContent = `Computer wins: ${computerWins}`;
+
     if ( playerWins == 5 ) {
         alert(' You have won this game! ')
         playerWins = 0;
@@ -85,9 +90,6 @@ function playRound(computerSelection, playerSelection) {
         playerWins = 0;
         computerWins = 0;
     }
-
-    pWins.textContent = `Player wins: ${playerWins}`;
-    cWins.textContent = `Computer wins: ${computerWins}`;
 
 }
 
