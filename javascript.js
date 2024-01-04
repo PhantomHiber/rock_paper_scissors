@@ -1,13 +1,9 @@
-function getRndNumber(min, max) {
-    return Math.floor( min + Math.random() * (max-min) );
-
-}
 
 
 
 function getComputerChoice(){
 
-    let rps = getRndNumber(1, 4);
+    let rps = Math.floor( 1 + Math.random() * (3) );
 
     switch(rps) {
         case 1:
@@ -33,84 +29,80 @@ function playRound(computerSelection, playerSelection) {
     let winner = "";
 
     if ( computerSelection.toLowerCase() == playerSelection.toLowerCase()) {
-        console.log(" Draw. ");
+        result.textContent = " Draw.";
     }
 
     else if ( computerSelection.toLowerCase() == "rock" && playerSelection.toLowerCase() == "scissors" ) {
-        console.log(" You lose! Rock beats scissors. ");
+        result.textContent =  " You lose! Rock beats scissors. "
         winner = "computer";
     }
 
     else if ( computerSelection.toLowerCase() == "rock" && playerSelection.toLowerCase() == "paper" ) {
-        console.log(" You win! Paper beats Rock. ");
+        result.textContent = " You win! Paper beats Rock. ";
         winner = "player";
     }
 
     else if ( computerSelection.toLowerCase() == "paper" && playerSelection.toLowerCase() == "scissors" ) {
-        console.log(" You win! Scissors cut paper. ");
+        result.textContent = " You win! Scissors cut paper. ";
         winner = "player";
     }
 
     else if ( computerSelection.toLowerCase() == "paper" && playerSelection.toLowerCase() == "rock" ) {
-        console.log(" You lose! Paper beats Rock. ");
+        result.textContent = " You lose! Paper beats Rock. ";
         winner = "computer";
     }
 
     else if ( computerSelection.toLowerCase() == "scissors" && playerSelection.toLowerCase() == "paper" ) {
-        console.log(" You lose! Scissors cut paper. ");
+        result.textContent = " You lose! Scissors cut paper. ";
         winner = "computer";
     }
 
     else if ( computerSelection.toLowerCase() == "scissors" && playerSelection.toLowerCase() == "rock" ) {
-        console.log(" You win! Rock beats scissors. ");
+        result.textContent = " You win! Rock beats scissors. ";
         winner = "player";
     }
 
-    return winner;
+    if (winner == "player") {
+
+        playerWins += 1;
+
+    }
+
+    else if (winner == "computer") {
+
+        computerWins += 1;
+
+    }
+
+    if ( playerWins == 5 ) {
+        alert(' You have won this game! ')
+        playerWins = 0;
+        computerWins = 0;
+    }
+
+    else if ( computerWins == 5 ) {
+        alert( ' You have lost this game! ')
+        playerWins = 0;
+        computerWins = 0;
+    }
+
+    pWins.textContent = `Player wins: ${playerWins}`;
+    cWins.textContent = `Computer wins: ${computerWins}`;
 
 }
 
 
-function game() {
+playerWins = 0;
+computerWins = 0;
 
-    let playerWins = 0;
-    let computerWins = 0;
-
-
-    for ( let i = 0; i < 5; i++ ) {
-
-        let computerChoice = getComputerChoice();
-        let playerChoice = prompt( "Rock, Paper or Scissors?" );
-
-        roundWinner = playRound(computerChoice, playerChoice);
-
-        if (roundWinner == "player") {
-
-            playerWins += 1;
-
-        }
-
-        else if (roundWinner == "computer") {
-
-            computerWins += 1;
-
-        }           
-    
-    
-    
-    }
-
-    if (playerWins > computerWins) {
-        alert("Player has won!");
-    }
-    else if (playerWins < computerWins) {
-        alert("Computer has won!");
-    }
-    else if (playerWins == computerWins) {
-        alert("Draw!");
-    }
+const rockButton = document.querySelector('#rock');
+const paperButton = document.querySelector('#paper');
+const scissorsButton = document.querySelector('#scissors');
+const pWins = document.querySelector('#pWins');
+const cWins = document.querySelector('#cWins');
+const result = document.querySelector('#result')
 
 
-}
-
-game();
+rockButton.addEventListener('click', () => playRound( getComputerChoice(), 'rock' ) );
+paperButton.addEventListener('click', () => playRound( getComputerChoice(), 'paper' ) );
+scissorsButton.addEventListener('click', () => playRound( getComputerChoice(), 'scissors' ) );
